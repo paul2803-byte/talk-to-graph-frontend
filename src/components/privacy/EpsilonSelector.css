@@ -1,0 +1,167 @@
+/* ── Epsilon Selector ──────────────────────────────────────── */
+
+.epsilon-selector {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    padding: var(--sp-2) var(--sp-3);
+    border-radius: var(--radius-md);
+    background: var(--bg-tertiary);
+    border: 1px solid hsla(220, 20%, 30%, 0.2);
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.epsilon-selector--disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+/* ── Header row ───────────────────────────────────────────── */
+
+.epsilon-selector-header {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+}
+
+.epsilon-selector-icon {
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.epsilon-selector-title {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-right: auto;
+}
+
+.epsilon-reset-btn {
+    font-size: var(--fs-xs) !important;
+    gap: 4px !important;
+}
+
+/* ── Controls row ─────────────────────────────────────────── */
+
+.epsilon-selector-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+}
+
+/* ── Range slider ─────────────────────────────────────────── */
+
+.epsilon-slider {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: linear-gradient(
+        to right,
+        var(--accent) 0%,
+        var(--accent) var(--fill, 0%),
+        var(--bg-elevated) var(--fill, 0%),
+        var(--bg-elevated) 100%
+    );
+    outline: none;
+    cursor: pointer;
+    transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.epsilon-slider:disabled {
+    cursor: not-allowed;
+}
+
+/* Webkit thumb */
+.epsilon-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg-secondary);
+    box-shadow: 0 0 6px hsla(210, 100%, 60%, 0.3);
+    cursor: pointer;
+    transition: transform var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.epsilon-slider:not(:disabled)::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 10px hsla(210, 100%, 60%, 0.5);
+}
+
+/* Firefox thumb */
+.epsilon-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg-secondary);
+    box-shadow: 0 0 6px hsla(210, 100%, 60%, 0.3);
+    cursor: pointer;
+}
+
+.epsilon-slider::-moz-range-track {
+    height: 4px;
+    border-radius: var(--radius-full);
+    background: transparent;
+}
+
+/* ── Number input ─────────────────────────────────────────── */
+
+.epsilon-number-input {
+    width: 64px;
+    padding: 2px var(--sp-2);
+    background: var(--bg-secondary);
+    border: 1px solid hsla(220, 20%, 30%, 0.35);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    text-align: center;
+    transition: border-color var(--duration-fast) var(--ease-out),
+                box-shadow var(--duration-fast) var(--ease-out);
+}
+
+.epsilon-number-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-soft);
+}
+
+.epsilon-number-input:disabled {
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* ── Max label ────────────────────────────────────────────── */
+
+.epsilon-max-label {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+    white-space: nowrap;
+    font-family: var(--font-mono);
+}
+
+/* ── Error state ──────────────────────────────────────────── */
+
+.epsilon-number-input--error {
+    border-color: var(--error);
+    box-shadow: 0 0 0 2px var(--error-soft);
+}
+
+.epsilon-number-input--error:focus {
+    border-color: var(--error);
+    box-shadow: 0 0 0 2px var(--error-soft);
+}
+
+.epsilon-error-msg {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--error);
+}

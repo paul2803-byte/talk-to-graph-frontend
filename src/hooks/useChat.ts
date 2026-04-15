@@ -24,7 +24,7 @@ export function useChat(
     });
 
     const sendMessage = useCallback(
-        async (question: string, data: object, ontologyUrl: string) => {
+        async (question: string, data: object, ontologyUrl: string, epsilon?: number) => {
             // Optimistically add user message
             setState((s) => ({
                 ...s,
@@ -41,6 +41,7 @@ export function useChat(
                     data,
                     ontology_url: ontologyUrl,
                     sessionId: state.sessionId,
+                    ...(epsilon !== undefined && { epsilon }),
                 });
 
                 // Update budget from response
