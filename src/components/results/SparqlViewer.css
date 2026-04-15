@@ -1,0 +1,35 @@
+.sparql-viewer {
+    border-radius: var(--radius-md);
+    border: 1px solid hsla(220, 20%, 30%, 0.25);
+    overflow: hidden;
+}
+
+.sparql-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--bg-elevated);
+    border-bottom: 1px solid hsla(220, 20%, 30%, 0.2);
+}
+
+.sparql-label {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.sparql-code {
+    padding: var(--sp-3) var(--sp-4);
+    margin: 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    white-space: pre-wrap;
+    word-break: break-word;
+}

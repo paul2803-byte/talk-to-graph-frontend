@@ -1,0 +1,32 @@
+.json-editor {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+}
+
+.json-textarea {
+    min-height: 180px;
+    tab-size: 2;
+}
+
+.json-textarea--error {
+    border-color: var(--error);
+}
+
+.json-textarea--error:focus {
+    box-shadow: 0 0 0 3px var(--error-soft);
+}
+
+.json-error {
+    padding: var(--sp-2) var(--sp-3);
+    background: var(--error-soft);
+    border-radius: var(--radius-sm);
+    font-size: var(--fs-xs);
+    color: var(--error);
+    font-family: var(--font-mono);
+    word-break: break-word;
+}
+
+.json-error-label {
+    font-weight: 600;
+}

@@ -1,0 +1,52 @@
+.file-uploader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: var(--sp-6) var(--sp-4);
+    border: 2px dashed hsla(220, 20%, 30%, 0.4);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--duration-fast) var(--ease-out);
+    text-align: center;
+}
+
+.file-uploader:hover,
+.file-uploader.drag-over {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.file-uploader.has-data {
+    border-color: hsla(155, 70%, 50%, 0.3);
+    background: hsla(155, 70%, 50%, 0.05);
+}
+
+.file-input-hidden {
+    display: none;
+}
+
+.file-icon {
+    color: var(--text-muted);
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.file-uploader:hover .file-icon {
+    color: var(--accent);
+}
+
+.file-icon--success {
+    color: var(--success) !important;
+}
+
+.file-label {
+    font-size: var(--fs-md);
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.file-hint {
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+}

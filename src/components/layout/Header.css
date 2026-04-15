@@ -1,0 +1,32 @@
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+}
+
+.header-icon {
+    color: var(--accent);
+}
+
+.header-title {
+    font-size: var(--fs-lg);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
+
+.header-badge {
+    padding: 2px 8px;
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--success);
+    background: hsla(155, 70%, 50%, 0.12);
+    border-radius: var(--radius-full);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-4);
+}

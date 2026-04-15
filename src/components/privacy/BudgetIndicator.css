@@ -1,0 +1,52 @@
+.budget-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 200px;
+}
+
+.budget-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--sp-3);
+}
+
+.budget-label-text {
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.budget-label-value {
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+}
+
+.budget-bar {
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.budget-bar-fill {
+    height: 100%;
+    border-radius: var(--radius-full);
+    transition: width var(--duration-slow) var(--ease-out),
+        background var(--duration-slow) var(--ease-out);
+}
+
+.budget-exhausted-label {
+    font-size: var(--fs-xs);
+    color: var(--error);
+    font-weight: 500;
+}
+
+.budget-indicator--exhausted .budget-bar {
+    background: var(--error-soft);
+}

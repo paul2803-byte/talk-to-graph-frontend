@@ -1,0 +1,32 @@
+.chat-input-bar {
+    flex-shrink: 0;
+    padding: var(--sp-4) var(--sp-5);
+    background: var(--bg-secondary);
+    border-top: 1px solid hsla(220, 20%, 30%, 0.2);
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.chat-input-field {
+    flex: 1;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--radius-xl);
+}
+
+.chat-send-btn {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-full);
+    padding: 0;
+}
+
+.spin-icon {
+    animation: spin 1s linear infinite;
+}

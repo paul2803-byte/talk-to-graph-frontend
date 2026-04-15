@@ -1,0 +1,7 @@
+.budget-reset-btn {
+    white-space: nowrap;
+}
+
+.spin-icon {
+    animation: spin 1s linear infinite;
+}
