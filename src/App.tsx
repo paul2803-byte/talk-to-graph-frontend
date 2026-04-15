@@ -15,6 +15,7 @@ import './App.css';
 
 function App() {
     const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
+    const [epsilon, setEpsilon] = useState<number | undefined>(undefined);
 
     const {
         data,
@@ -39,16 +40,20 @@ function App() {
     const handleSend = useCallback(
         (question: string) => {
             if (!data || !ontologyUrl) return;
-            chat.sendMessage(question, data, ontologyUrl);
+            chat.sendMessage(question, data, ontologyUrl, epsilon);
         },
-        [data, ontologyUrl, chat],
+        [data, ontologyUrl, chat, epsilon],
     );
+
+    const epsilonExceedsBudget =
+        epsilon !== undefined && epsilon > budget.remainingBudget;
 
     const getDisabledReason = (): string | undefined => {
         if (backendOnline === false) return 'Backend is not reachable';
         if (!isValid) return 'Load JSON-LD data first';
         if (!ontologyUrl.trim()) return 'Enter an ontology URL first';
         if (budget.isExhausted) return 'Privacy budget exhausted';
+        if (epsilonExceedsBudget) return 'Epsilon exceeds remaining budget';
         return undefined;
     };
 
@@ -103,9 +108,13 @@ function App() {
                     />
                     <ChatInput
                         onSend={handleSend}
-                        disabled={!isReady || budget.isExhausted || backendOnline === false}
+                        disabled={!isReady || budget.isExhausted || backendOnline === false || epsilonExceedsBudget}
                         disabledReason={disabledReason}
                         isLoading={chat.isLoading}
+                        epsilon={epsilon}
+                        onEpsilonChange={setEpsilon}
+                        remainingBudget={budget.remainingBudget}
+                        epsilonBase={budget.epsilonBase}
                     />
                 </>
             }

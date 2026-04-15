@@ -24,6 +24,7 @@ export interface TalkToDataRequest {
     data: object;
     ontology_url: string;
     sessionId?: string | null;
+    epsilon?: number;
 }
 
 /* ── Responses ─────────────────────────────────────────────── */
@@ -38,6 +39,7 @@ interface TalkToDataBaseResponse {
 
 export interface TalkToDataSuccessResponse extends TalkToDataBaseResponse {
     status: 'success';
+    epsilonUsed: number;
     data: {
         query_results: QueryResultRow[];
         sparql_query: string;
