@@ -33,3 +33,24 @@
     white-space: pre-wrap;
     word-break: break-word;
 }
+
+.sparql-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+}
+
+.sparql-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: var(--sp-3) var(--sp-4);
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: var(--bg-tertiary);
+    border: none;
+    resize: vertical;
+    outline: none;
+}

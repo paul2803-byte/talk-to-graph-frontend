@@ -8,12 +8,14 @@ interface ChatWindowProps {
     conversationHistory: ConversationEntry[];
     isLoading: boolean;
     lastResponse: TalkToDataResponse | null;
+    onExecuteQuery?: (query: string) => void;
 }
 
 export function ChatWindow({
     conversationHistory,
     isLoading,
     lastResponse,
+    onExecuteQuery,
 }: ChatWindowProps) {
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -71,6 +73,7 @@ export function ChatWindow({
                             queryResults={queryResults}
                             sparqlQuery={sparqlQuery}
                             animationDelay={i * 0.05}
+                            onExecuteQuery={onExecuteQuery}
                         />
                     );
                 })}

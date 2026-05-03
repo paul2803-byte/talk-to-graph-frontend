@@ -25,6 +25,7 @@ export interface TalkToDataRequest {
     ontology_url: string;
     sessionId?: string | null;
     epsilon?: number;
+    adjusted_query?: string;
 }
 
 /* ── Responses ─────────────────────────────────────────────── */
