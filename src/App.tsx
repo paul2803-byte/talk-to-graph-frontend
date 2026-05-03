@@ -45,6 +45,16 @@ function App() {
         [data, ontologyUrl, chat, epsilon],
     );
 
+    const handleExecuteAdjustedQuery = useCallback(
+        (adjustedQuery: string) => {
+            if (!data || !ontologyUrl) return;
+            const lastUserMsg = chat.conversationHistory.slice().reverse().find(m => m.role === 'user');
+            const questionText = lastUserMsg ? lastUserMsg.content : "Executing adjusted SPARQL query...";
+            chat.sendMessage(questionText, data, ontologyUrl, epsilon, adjustedQuery);
+        },
+        [data, ontologyUrl, chat, epsilon],
+    );
+
     const epsilonExceedsBudget =
         epsilon !== undefined && epsilon > budget.remainingBudget;
 
@@ -105,6 +115,7 @@ function App() {
                         conversationHistory={chat.conversationHistory}
                         isLoading={chat.isLoading}
                         lastResponse={chat.lastResponse}
+                        onExecuteQuery={handleExecuteAdjustedQuery}
                     />
                     <ChatInput
                         onSend={handleSend}

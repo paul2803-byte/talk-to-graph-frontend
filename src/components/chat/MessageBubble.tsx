@@ -12,6 +12,7 @@ interface MessageBubbleProps {
     queryResults?: QueryResultRow[];
     sparqlQuery?: string;
     animationDelay?: number;
+    onExecuteQuery?: (query: string) => void;
 }
 
 export function MessageBubble({
@@ -21,6 +22,7 @@ export function MessageBubble({
     queryResults,
     sparqlQuery,
     animationDelay = 0,
+    onExecuteQuery,
 }: MessageBubbleProps) {
     const [showResults, setShowResults] = useState(false);
     const [showSparql, setShowSparql] = useState(false);
@@ -77,7 +79,7 @@ export function MessageBubble({
                                 </button>
                                 {showSparql && (
                                     <div className="animate-fade-in">
-                                        <SparqlViewer query={sparqlQuery} />
+                                        <SparqlViewer query={sparqlQuery} onExecuteQuery={onExecuteQuery} />
                                     </div>
                                 )}
                             </div>
