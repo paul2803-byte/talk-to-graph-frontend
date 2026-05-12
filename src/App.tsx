@@ -6,6 +6,7 @@ import { ChatWindow } from './components/chat/ChatWindow';
 import { ChatInput } from './components/chat/ChatInput';
 import { BudgetIndicator } from './components/privacy/BudgetIndicator';
 import { BudgetResetButton } from './components/privacy/BudgetResetButton';
+import { PrivacyToggle } from './components/privacy/PrivacyToggle';
 import { useDataUpload } from './hooks/useDataUpload';
 import { useBudget } from './hooks/useBudget';
 import { useChat } from './hooks/useChat';
@@ -16,6 +17,7 @@ import './App.css';
 function App() {
     const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
     const [epsilon, setEpsilon] = useState<number | undefined>(undefined);
+    const [privacyMode, setPrivacyMode] = useState<boolean>(true);
 
     const {
         data,
@@ -40,9 +42,9 @@ function App() {
     const handleSend = useCallback(
         (question: string) => {
             if (!data || !ontologyUrl) return;
-            chat.sendMessage(question, data, ontologyUrl, epsilon);
+            chat.sendMessage(question, data, ontologyUrl, epsilon, undefined, privacyMode);
         },
-        [data, ontologyUrl, chat, epsilon],
+        [data, ontologyUrl, chat, epsilon, privacyMode],
     );
 
     const handleExecuteAdjustedQuery = useCallback(
@@ -50,9 +52,9 @@ function App() {
             if (!data || !ontologyUrl) return;
             const lastUserMsg = chat.conversationHistory.slice().reverse().find(m => m.role === 'user');
             const questionText = lastUserMsg ? lastUserMsg.content : "Executing adjusted SPARQL query...";
-            chat.sendMessage(questionText, data, ontologyUrl, epsilon, adjustedQuery);
+            chat.sendMessage(questionText, data, ontologyUrl, epsilon, adjustedQuery, privacyMode);
         },
-        [data, ontologyUrl, chat, epsilon],
+        [data, ontologyUrl, chat, epsilon, privacyMode],
     );
 
     const epsilonExceedsBudget =
@@ -62,8 +64,12 @@ function App() {
         if (backendOnline === false) return 'Backend is not reachable';
         if (!isValid) return 'Load JSON-LD data first';
         if (!ontologyUrl.trim()) return 'Enter an ontology URL first';
-        if (budget.isExhausted) return 'Privacy budget exhausted';
-        if (epsilonExceedsBudget) return 'Epsilon exceeds remaining budget';
+        
+        if (privacyMode) {
+            if (budget.isExhausted) return 'Privacy budget exhausted';
+            if (epsilonExceedsBudget) return 'Epsilon exceeds remaining budget';
+        }
+        
         return undefined;
     };
 
@@ -73,14 +79,19 @@ function App() {
         <AppShell
             header={
                 <Header>
-                    <BudgetIndicator
-                        remainingBudget={budget.remainingBudget}
-                        epsilonTotal={budget.epsilonTotal}
-                        fraction={budget.budgetFraction}
-                        isExhausted={budget.isExhausted}
-                        isLoading={budget.isLoading}
-                    />
-                    <BudgetResetButton onReset={budget.resetBudget} />
+                    {privacyMode && (
+                        <>
+                            <BudgetIndicator
+                                remainingBudget={budget.remainingBudget}
+                                epsilonTotal={budget.epsilonTotal}
+                                fraction={budget.budgetFraction}
+                                isExhausted={budget.isExhausted}
+                                isLoading={budget.isLoading}
+                            />
+                            <BudgetResetButton onReset={budget.resetBudget} />
+                        </>
+                    )}
+                    <PrivacyToggle privacyMode={privacyMode} onChange={setPrivacyMode} />
                 </Header>
             }
             sidebar={
@@ -119,13 +130,14 @@ function App() {
                     />
                     <ChatInput
                         onSend={handleSend}
-                        disabled={!isReady || budget.isExhausted || backendOnline === false || epsilonExceedsBudget}
+                        disabled={!isReady || backendOnline === false || (privacyMode && (budget.isExhausted || epsilonExceedsBudget))}
                         disabledReason={disabledReason}
                         isLoading={chat.isLoading}
                         epsilon={epsilon}
                         onEpsilonChange={setEpsilon}
                         remainingBudget={budget.remainingBudget}
                         epsilonBase={budget.epsilonBase}
+                        privacyMode={privacyMode}
                     />
                 </>
             }

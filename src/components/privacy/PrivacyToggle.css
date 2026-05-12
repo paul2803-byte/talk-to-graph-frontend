@@ -1,0 +1,60 @@
+.privacy-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-2);
+    background: var(--bg-tertiary);
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--radius-full);
+    border: 1px solid hsla(220, 20%, 30%, 0.35);
+}
+
+.privacy-toggle-label {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-1);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+    transition: color var(--duration-fast) var(--ease-out);
+}
+
+.privacy-toggle-label.active {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.privacy-toggle-switch {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background: var(--bg-elevated);
+    transition: background-color var(--duration-normal) var(--ease-out);
+    padding: 0;
+}
+
+.privacy-toggle-switch.on {
+    background: var(--success);
+}
+
+.privacy-toggle-switch.off {
+    background: var(--bg-elevated);
+    border: 1px solid hsla(220, 20%, 30%, 0.5);
+}
+
+.privacy-toggle-knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: transform var(--duration-normal) var(--ease-out);
+    box-shadow: var(--shadow-sm);
+}
+
+.privacy-toggle-switch.on .privacy-toggle-knob {
+    transform: translateX(16px);
+}

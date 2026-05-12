@@ -26,6 +26,7 @@ export interface TalkToDataRequest {
     sessionId?: string | null;
     epsilon?: number;
     adjusted_query?: string;
+    privacy_mode?: boolean;
 }
 
 /* ── Responses ─────────────────────────────────────────────── */

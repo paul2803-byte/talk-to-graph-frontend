@@ -12,6 +12,7 @@ interface ChatInputProps {
     onEpsilonChange: (value: number | undefined) => void;
     remainingBudget: number;
     epsilonBase: number;
+    privacyMode: boolean;
 }
 
 export function ChatInput({
@@ -23,6 +24,7 @@ export function ChatInput({
     onEpsilonChange,
     remainingBudget,
     epsilonBase,
+    privacyMode,
 }: ChatInputProps) {
     const [text, setText] = useState('');
 
@@ -45,14 +47,16 @@ export function ChatInput({
 
     return (
         <div className="chat-input-bar">
-            <div className="chat-input-wrapper">
-                <EpsilonSelector
-                    epsilon={epsilon}
-                    onChange={onEpsilonChange}
-                    remainingBudget={remainingBudget}
-                    epsilonBase={epsilonBase}
-                    disabled={isLoading}
-                />
+            <div className={`chat-input-wrapper ${!privacyMode ? 'general-mode' : ''}`}>
+                {privacyMode && (
+                    <EpsilonSelector
+                        epsilon={epsilon}
+                        onChange={onEpsilonChange}
+                        remainingBudget={remainingBudget}
+                        epsilonBase={epsilonBase}
+                        disabled={isLoading}
+                    />
+                )}
                 <div className="chat-input-container">
                     <input
                         id="chat-input"
